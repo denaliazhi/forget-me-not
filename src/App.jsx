@@ -4,7 +4,6 @@ import { Directions } from "./components/Directions";
 import { Game } from "./components/Game";
 
 function App() {
-  const [highScore, setHighScore] = useState(0);
   const [showDialog, setShowDialog] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -21,11 +20,7 @@ function App() {
         flower to grow your score. 2. Pick each flower once, no more. 3. Picking
         twice is not very nice! We'll send you out the door.
       </Directions>
-      <Game
-        highScore={highScore}
-        play={isPlaying}
-        setPlay={setIsPlaying}
-      ></Game>
+      <Game play={isPlaying} setPlay={setIsPlaying}></Game>
       <button className="play-btn" onClick={() => {}}>
         Restart
       </button>
