@@ -16,6 +16,10 @@ export function Game({ play, setPlay }) {
     limit: 10,
   };
 
+  function addOne() {
+    setScore(score + 1);
+  }
+
   useEffect(() => {
     let ignore = false;
     if (play) {
@@ -52,7 +56,7 @@ export function Game({ play, setPlay }) {
     <>
       <div className="tray">
         {stickers.map((sticker) => (
-          <Slot url={sticker}></Slot>
+          <Slot url={sticker} handleClick={addOne}></Slot>
         ))}
       </div>
       <div className="scoreboard">

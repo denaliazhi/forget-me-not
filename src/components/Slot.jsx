@@ -1,6 +1,6 @@
-export function Slot({ url }) {
+export function Slot({ url, handleClick }) {
   return (
-    <div className="slot">
+    <div className="slot" onClick={handleClick}>
       <img src={url} alt="A sticker" />
     </div>
   );
