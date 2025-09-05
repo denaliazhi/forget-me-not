@@ -21,17 +21,19 @@ function App() {
         twice is not very nice! We'll send you out the door.
       </Directions>
       <Game play={isPlaying} setPlay={setIsPlaying}></Game>
-      <button
-        className="play-btn"
-        onClick={() => {
-          setIsPlaying(false);
-        }}
-      >
-        Restart
-      </button>
-      <button className="directions-btn" onClick={() => setShowDialog(true)}>
-        How To Play
-      </button>
+      <div className="game-bar">
+        <button
+          className="play-btn"
+          onClick={() => {
+            setIsPlaying(false);
+          }}
+        >
+          Restart
+        </button>
+        <button className="directions-btn" onClick={() => setShowDialog(true)}>
+          How To Play
+        </button>
+      </div>
     </>
   );
 }
