@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+dialog {
+  z-index: 20;
+}
+
 .tray {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

@@ -2,7 +2,7 @@ export function Directions({ show, setShow, play, setPlay, children }) {
   return (
     <>
       {show && (
-        <dialog closedBy="none" open>
+        <dialog open>
           <h1>How To Play</h1>
           <p>{children}</p>
           <button
