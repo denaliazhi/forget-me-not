@@ -1,12 +1,20 @@
-export function Directions({ title, button, show, setShow, children }) {
+export function Directions({ show, setShow, play, setPlay, children }) {
   return (
     <>
       {show && (
         <dialog closedBy="none" open>
-          <h1>{title}</h1>
+          <h1>How To Play</h1>
           <p>{children}</p>
-          <button className="dialog-btn" onClick={() => setShow(false)}>
-            {button}
+          <button
+            className="dialog-btn"
+            onClick={() => {
+              setShow(false);
+              if (!play) {
+                setPlay(true);
+              }
+            }}
+          >
+            {play ? "Close" : "Start"}
           </button>
         </dialog>
       )}
