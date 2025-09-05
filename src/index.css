@@ -38,7 +38,7 @@ button {
   color: var(--dark-magenta);
   background-color: var(--light-pink);
   cursor: pointer;
-  transition: (color, background-color) 0.25s;
+  transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
 }
 button:hover {
   background-color: var(--dark-magenta);
