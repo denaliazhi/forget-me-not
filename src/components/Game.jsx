@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Slot } from "./Slot";
+import { Message } from "./Message";
 
 export function Game({ play, setPlay }) {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [stickers, setStickers] = useState([]);
+  const [lastMove, setLastMove] = useState(-1);
 
   const query = {
     resource: "stickers",
@@ -14,6 +16,8 @@ export function Game({ play, setPlay }) {
     key: "XCk8CWJJK1PN6hLJyEkpwaroDhoU0iFW",
     term: "cute flower",
     limit: 10,
+    // Randomize stickers for each round
+    offset: Math.floor(Math.random() * 100) + 1,
   };
 
   function endGame() {
@@ -22,16 +26,20 @@ export function Game({ play, setPlay }) {
       setHighScore(score);
     }
     setScore(0);
+  }
+
+  function restart() {
     setStickers([]);
+    setPlay(true);
   }
 
   function handleClick(id) {
     const index = stickers.findIndex((sticker) => sticker.id === id);
     if (index !== -1) {
       let clicked = stickers[index];
-      console.log(clicked.id);
       if (clicked.count !== 0) {
         endGame();
+        setLastMove(index);
       } else {
         clicked.count++;
         setScore(score + 1);
@@ -46,9 +54,9 @@ export function Game({ play, setPlay }) {
       fetch(
         `https://api.giphy.com/v1/${query.resource}/${query.endpoint}?api_key=${
           query.key
-        }&q=${query.term.replace(" ", "+")}&limit=${
-          query.limit
-        }&offset=0&rating=g&lang=en&bundle=messaging_non_clips`
+        }&q=${query.term.replace(" ", "+")}&limit=${query.limit}&offset=${
+          query.offset
+        }`
       )
         .then((resp) => {
           if (!resp.ok) {
@@ -78,9 +86,10 @@ export function Game({ play, setPlay }) {
   return (
     <>
       <div className="tray">
-        {stickers.map((sticker) => (
-          <Slot sticker={sticker} handleClick={handleClick}></Slot>
-        ))}
+        {stickers.map((sticker) => {
+          console.log("re-rendered stickers");
+          return <Slot sticker={sticker} handleClick={handleClick}></Slot>;
+        })}
       </div>
       <div className="scoreboard">
         <div>
@@ -92,6 +101,9 @@ export function Game({ play, setPlay }) {
           <p>{highScore}</p>
         </div>
       </div>
+      {!play && lastMove !== -1 && (
+        <Message sticker={stickers[lastMove].url} handleClick={restart} />
+      )}
     </>
   );
 }
