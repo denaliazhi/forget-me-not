@@ -20,47 +20,6 @@ export function Game({ play, setPlay }) {
     offset: Math.floor(Math.random() * 100) + 1,
   };
 
-  function end() {
-    setPlay(false);
-    if (score > highScore) {
-      setHighScore(score);
-    }
-    setScore(0);
-  }
-
-  function restart() {
-    setStickers([]);
-    setPlay(true);
-  }
-
-  function shuffle() {
-    let copy = [...stickers];
-    console.log(`Before shuffle: ${copy}`);
-    for (let a = stickers.length - 1; a > 0; a--) {
-      let b = Math.floor(Math.random() * (a + 1));
-      [copy[b], copy[a]] = [copy[a], copy[b]];
-    }
-    console.log(`After shuffle: ${copy}`);
-    return copy;
-  }
-
-  function handleClick(id) {
-    const index = stickers.findIndex((sticker) => sticker.id === id);
-    if (index !== -1) {
-      let clicked = stickers[index];
-      // Sticker was already clicked
-      if (clicked.count !== 0) {
-        end();
-        setLastMove(index);
-        // Sticker wasn't clicked before
-      } else {
-        clicked.count++;
-        setScore(score + 1);
-        setStickers(shuffle());
-      }
-    }
-  }
-
   useEffect(() => {
     let ignore = false;
     if (play) {
@@ -97,6 +56,46 @@ export function Game({ play, setPlay }) {
     };
   }, [play]);
 
+  function shuffle() {
+    let copy = [...stickers];
+    for (let a = stickers.length - 1; a > 0; a--) {
+      let b = Math.floor(Math.random() * (a + 1));
+      [copy[b], copy[a]] = [copy[a], copy[b]];
+    }
+    return copy;
+  }
+
+  function handleClick(id) {
+    const index = stickers.findIndex((sticker) => sticker.id === id);
+    if (index !== -1) {
+      let clicked = stickers[index];
+
+      // Sticker clicked for first time
+      if (clicked.count === 0) {
+        clicked.count++;
+        setScore(score + 1);
+        setStickers(shuffle());
+        // Sticker has been clicked before
+      } else {
+        setLastMove(index);
+        end();
+      }
+    }
+  }
+
+  function end() {
+    setPlay(false);
+    if (score > highScore) {
+      setHighScore(score);
+    }
+  }
+
+  function restart() {
+    setPlay(true);
+    setLastMove(-1);
+    setScore(0);
+  }
+
   return (
     <>
       <div className="tray">
@@ -119,9 +118,27 @@ export function Game({ play, setPlay }) {
           <p>{highScore}</p>
         </div>
       </div>
-      {!play && lastMove !== -1 && (
-        <Message sticker={stickers[lastMove].url} handleClick={restart} />
-      )}
+      {!play && score === 10 ? (
+        // Show winning message
+        <Message
+          title={"Congrats!"}
+          content={
+            "You've picked exactly one of each flower. We hope you enjoy them, and thank you for visiting 👐."
+          }
+          sticker={null}
+          handleClick={restart}
+        />
+      ) : lastMove !== -1 ? (
+        // Show losing message
+        <Message
+          title={"Oh no...."}
+          content={
+            "It looks like you picked this flower twice! We must ask you to leave now 😔."
+          }
+          sticker={stickers[lastMove].url}
+          handleClick={restart}
+        />
+      ) : null}
     </>
   );
 }

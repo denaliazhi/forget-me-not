@@ -1,12 +1,12 @@
-export function Message({ sticker, handleClick }) {
+export function Message({ title, content, sticker, handleClick }) {
   return (
     <div className="msg-bar">
-      <h3>Uh oh...</h3>
+      <h3>{title}</h3>
       <div>
-        <p>It looks like you picked this flower twice! </p>
-        <img src={sticker} />
+        <p>{content}</p>
+        {sticker && <img src={sticker} />}
       </div>
-      <button onClick={handleClick}>Try again</button>
+      <button onClick={handleClick}>Play again</button>
     </div>
   );
 }
