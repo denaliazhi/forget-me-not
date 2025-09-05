@@ -16,8 +16,27 @@ export function Game({ play, setPlay }) {
     limit: 10,
   };
 
-  function addOne() {
-    setScore(score + 1);
+  function endGame() {
+    setPlay(false);
+    if (score > highScore) {
+      setHighScore(score);
+    }
+    setScore(0);
+    setStickers([]);
+  }
+
+  function handleClick(id) {
+    const index = stickers.findIndex((sticker) => sticker.id === id);
+    if (index !== -1) {
+      let clicked = stickers[index];
+      console.log(clicked.id);
+      if (clicked.count !== 0) {
+        endGame();
+      } else {
+        clicked.count++;
+        setScore(score + 1);
+      }
+    }
   }
 
   useEffect(() => {
@@ -39,9 +58,13 @@ export function Game({ play, setPlay }) {
         })
         .then((unpacked) => {
           if (!ignore) {
-            const stickerSet = unpacked.data.map(
-              (item) => item.images.original.url
-            );
+            const stickerSet = unpacked.data.map((item) => {
+              return {
+                id: crypto.randomUUID(),
+                url: item.images.original.url,
+                count: 0,
+              };
+            });
             setStickers(stickerSet);
           }
         });
@@ -56,7 +79,7 @@ export function Game({ play, setPlay }) {
     <>
       <div className="tray">
         {stickers.map((sticker) => (
-          <Slot url={sticker} handleClick={addOne}></Slot>
+          <Slot sticker={sticker} handleClick={handleClick}></Slot>
         ))}
       </div>
       <div className="scoreboard">
