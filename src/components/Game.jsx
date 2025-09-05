@@ -18,38 +18,53 @@ export function Game({ play, setPlay }) {
 
   useEffect(() => {
     let ignore = false;
-    fetch(
-      `https://api.giphy.com/v1/${query.resource}/${query.endpoint}?api_key=${
-        query.key
-      }&q=${query.term.replace(" ", "+")}&limit=${
-        query.limit
-      }&offset=0&rating=g&lang=en&bundle=messaging_non_clips`
-    )
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error(`Failed to get stickers from GIPHY: ${resp}`);
-        }
-        return resp.json();
-      })
-      .then((unpacked) => {
-        if (!ignore) {
-          const stickerSet = unpacked.data.map(
-            (item) => item.images.original.url
-          );
-          setStickers(stickerSet);
-        }
-      });
+    if (play) {
+      console.log("Running api...");
+      fetch(
+        `https://api.giphy.com/v1/${query.resource}/${query.endpoint}?api_key=${
+          query.key
+        }&q=${query.term.replace(" ", "+")}&limit=${
+          query.limit
+        }&offset=0&rating=g&lang=en&bundle=messaging_non_clips`
+      )
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Failed to get stickers from GIPHY: ${resp}`);
+          }
+          return resp.json();
+        })
+        .then((unpacked) => {
+          if (!ignore) {
+            const stickerSet = unpacked.data.map(
+              (item) => item.images.original.url
+            );
+            setStickers(stickerSet);
+          }
+        });
+    }
 
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [play]);
 
   return (
     <>
-      {stickers.map((sticker) => (
-        <Slot url={sticker}></Slot>
-      ))}
+      <div className="tray">
+        {stickers.map((sticker) => (
+          <Slot url={sticker}></Slot>
+        ))}
+      </div>
+      <div className="scoreboard">
+        <div>
+          <h2>Current Score:</h2>
+          <p>{score}</p>
+        </div>
+        <div>
+          <h2>High Score:</h2>
+          <p>{highScore}</p>
+        </div>
+      </div>
     </>
   );
 }
