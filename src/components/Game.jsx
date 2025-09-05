@@ -20,7 +20,7 @@ export function Game({ play, setPlay }) {
     offset: Math.floor(Math.random() * 100) + 1,
   };
 
-  function endGame() {
+  function end() {
     setPlay(false);
     if (score > highScore) {
       setHighScore(score);
@@ -33,16 +33,30 @@ export function Game({ play, setPlay }) {
     setPlay(true);
   }
 
+  function shuffle() {
+    let copy = [...stickers];
+    console.log(`Before shuffle: ${copy}`);
+    for (let a = stickers.length - 1; a > 0; a--) {
+      let b = Math.floor(Math.random() * (a + 1));
+      [copy[b], copy[a]] = [copy[a], copy[b]];
+    }
+    console.log(`After shuffle: ${copy}`);
+    return copy;
+  }
+
   function handleClick(id) {
     const index = stickers.findIndex((sticker) => sticker.id === id);
     if (index !== -1) {
       let clicked = stickers[index];
+      // Sticker was already clicked
       if (clicked.count !== 0) {
-        endGame();
+        end();
         setLastMove(index);
+        // Sticker wasn't clicked before
       } else {
         clicked.count++;
         setScore(score + 1);
+        setStickers(shuffle());
       }
     }
   }
@@ -87,8 +101,12 @@ export function Game({ play, setPlay }) {
     <>
       <div className="tray">
         {stickers.map((sticker) => {
-          console.log("re-rendered stickers");
-          return <Slot sticker={sticker} handleClick={handleClick}></Slot>;
+          return (
+            <Slot
+              sticker={sticker}
+              handleClick={play ? handleClick : null}
+            ></Slot>
+          );
         })}
       </div>
       <div className="scoreboard">

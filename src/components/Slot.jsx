@@ -5,12 +5,13 @@ export function Slot({ sticker, handleClick }) {
       id={sticker.id}
       className="slot"
       onClick={(e) => {
-        let id =
-          e.target.parentNode.className === "tray"
-            ? e.target.id
-            : e.target.parentNode.id;
-        console.log("Clicked...");
-        handleClick(id);
+        if (handleClick) {
+          let id =
+            e.target.parentNode.className === "tray"
+              ? e.target.id
+              : e.target.parentNode.id;
+          handleClick(id);
+        }
       }}
     >
       <img src={sticker.url} alt="A sticker" />
