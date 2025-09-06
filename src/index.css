@@ -12,6 +12,12 @@
   --light-pink: #d2b2bd;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   min-width: 320px;
@@ -21,18 +27,23 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
   font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.2rem;
+}
+h3 {
+  font-size: 1rem;
+}
+p {
+  font-size: 0.9rem;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid var(--dark-magenta);
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: inherit;
   color: var(--dark-magenta);
@@ -46,7 +57,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 3px auto -webkit-focus-ring-color;
 }
 
 a {

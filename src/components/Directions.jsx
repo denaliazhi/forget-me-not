@@ -7,13 +7,17 @@ export function Directions({
   children,
 }) {
   let text = first ? "Start" : "Close";
-
   return (
     <>
       {show && (
         <dialog open>
-          <h1>How To Play</h1>
-          <p>{children}</p>
+          <h1>How to play</h1>
+          <p>This game is simple 🌷:</p>
+          <ol>
+            {children.split("\n").map((line, index) => (
+              <li>{line}</li>
+            ))}
+          </ol>
           <button
             className="dialog-btn"
             onClick={() => {

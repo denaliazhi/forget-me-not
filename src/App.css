@@ -1,5 +1,5 @@
 #root {
-  max-width: 850px;
+  max-width: 790px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -22,20 +22,20 @@
 
 dialog {
   z-index: 20;
-  width: 30rem;
+  width: 23rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   background-color: #ffffffa8;
   backdrop-filter: blur(0.5rem);
   border: none;
-}
-
-dialog h1 {
-  font-size: 2rem;
+  margin: auto;
   color: var(--dark-magenta);
 }
-dialog p {
-  padding: 0 2rem;
-  text-align: justify;
+
+dialog ol {
+  text-align: left;
+  padding: 1rem 1.5rem 1rem 3rem;
+  font-size: 0.8rem;
 }
 
 .tray {
@@ -47,23 +47,22 @@ dialog p {
 }
 
 .slot {
-  box-sizing: border-box;
   place-self: center;
   padding: 1rem;
   background-color: #c8a5b1;
   border-radius: 0.3rem;
   box-shadow: inset 2px 2px 2px 1px #502a3767;
-  width: 8rem;
-  height: 8rem;
+  width: 7.8rem;
+  height: 7.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: border ease-in 50ms;
 }
 
 .slot:hover {
   cursor: pointer;
-  box-shadow: none;
-  border: 3px solid var(--dark-magenta);
+  border: 2px solid var(--dark-magenta);
 }
 
 .slot img {
@@ -73,7 +72,7 @@ dialog p {
 }
 
 .slot img:hover {
-  transform: scale(130%);
+  transform: rotate(-20deg) scale(130%);
 }
 
 .scoreboard {
@@ -83,14 +82,15 @@ dialog p {
 }
 
 .scoreboard div {
+  margin-top: 1rem;
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
 .scoreboard h2 {
-  font-size: 1rem;
-  font-weight: normal;
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 .scoreboard p {
   color: white;
@@ -122,6 +122,10 @@ dialog p {
   margin: 0;
 }
 
+.msg-bar p {
+  font-size: 0.8rem;
+}
+
 .msg-bar img {
   height: 100%;
   width: 4rem;
@@ -132,6 +136,7 @@ dialog p {
   border: 1px solid var(--light-pink);
   background-color: var(--dark-magenta);
   color: var(--light-pink);
+  min-width: 20%;
 }
 
 .msg-bar button:hover {
