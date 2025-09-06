@@ -1,5 +1,5 @@
 #root {
-  max-width: 790px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -43,21 +43,25 @@ dialog ol {
 }
 
 .tray {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.5rem; */
   margin-bottom: 1rem;
 }
 
 .slot {
+  box-sizing: border-box;
   place-self: center;
-  padding: 1rem;
+  padding: 1.5rem;
   background-color: #c8a5b1;
   border-radius: 0.3rem;
   box-shadow: inset 2px 2px 2px 1px #502a3767;
-  width: 7.8rem;
-  height: 7.8rem;
+  height: 7rem;
+  width: 7rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +74,7 @@ dialog ol {
 }
 
 .slot img {
-  width: 4rem;
+  max-height: 100%;
   filter: drop-shadow(2px 2px #fff);
   transition: transform ease-out 250ms;
 }
