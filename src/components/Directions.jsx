@@ -1,4 +1,13 @@
-export function Directions({ show, setShow, play, setPlay, children }) {
+export function Directions({
+  show,
+  setShow,
+  first,
+  setFirst,
+  setPlay,
+  children,
+}) {
+  let text = first ? "Start" : "Close";
+
   return (
     <>
       {show && (
@@ -9,12 +18,13 @@ export function Directions({ show, setShow, play, setPlay, children }) {
             className="dialog-btn"
             onClick={() => {
               setShow(false);
-              if (!play) {
+              if (first) {
                 setPlay(true);
+                setFirst(false);
               }
             }}
           >
-            {play ? "Close" : "Start"}
+            {text}
           </button>
         </dialog>
       )}

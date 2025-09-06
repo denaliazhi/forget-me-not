@@ -112,6 +112,7 @@ dialog p {
   border-radius: 0.5rem;
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .msg-bar p,
@@ -122,8 +123,8 @@ dialog p {
 }
 
 .msg-bar img {
-  height: 3rem;
-  width: auto;
+  height: 100%;
+  width: 4rem;
 }
 
 .msg-bar button {

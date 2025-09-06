@@ -6,6 +6,7 @@ import { Game } from "./components/Game";
 function App() {
   const [showDialog, setShowDialog] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isFirst, setIsFirst] = useState(true);
 
   return (
     <>
@@ -14,7 +15,8 @@ function App() {
         <Directions
           show={showDialog}
           setShow={setShowDialog}
-          play={isPlaying}
+          first={isFirst}
+          setFirst={setIsFirst}
           setPlay={setIsPlaying}
         >
           {`Welcome to our garden 🌷. The game is simple:
