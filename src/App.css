@@ -75,6 +75,7 @@ dialog ol {
 
 .slot img {
   max-height: 100%;
+  max-width: 4rem;
   filter: drop-shadow(2px 2px #fff);
   transition: transform ease-out 250ms;
 }
