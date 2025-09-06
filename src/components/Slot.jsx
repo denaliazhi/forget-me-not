@@ -14,7 +14,7 @@ export function Slot({ sticker, handleClick }) {
         }
       }}
     >
-      <img src={sticker.url} alt="A sticker" />
+      {sticker.url ? <img src={sticker.url} alt="A sticker" /> : null}
     </div>
   );
 }

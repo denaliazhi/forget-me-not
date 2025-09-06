@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Slot } from "./Slot";
 import { Message } from "./Message";
+import { text } from "../text";
 
 export function Game({ play, setPlay, term }) {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [stickers, setStickers] = useState([]);
+  const [stickers, setStickers] = useState(
+    new Array(10).fill(text.placeholder)
+  );
   const [lastMove, setLastMove] = useState(-1);
 
   const query = {

@@ -1,12 +1,13 @@
 #root {
-  max-width: 900px;
+  max-width: 830px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  transform: scale(0.9);
 }
 
 #title {
@@ -15,7 +16,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 80%;
+  width: 32rem;
   height: 4rem;
   margin: 2rem;
 }
@@ -28,9 +29,11 @@ dialog {
   background-color: #eef0eda8;
   backdrop-filter: blur(0.5rem);
   border: none;
-  margin: 1rem auto;
+  margin: auto;
   color: var(--darker-accent);
   box-shadow: 2px 2px 2px 1px var(--darker-accent);
+
+  transform: scale(1.1);
 }
 
 dialog ol {
@@ -62,7 +65,7 @@ dialog ol {
   border-radius: 0.3rem;
   box-shadow: inset 2px 2px 2px 1px var(--darker-accent);
   height: 7rem;
-  width: clamp(5rem, 20%, 8rem);
+  width: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
