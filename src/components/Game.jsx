@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Slot } from "./Slot";
 import { Message } from "./Message";
 
-export function Game({ play, setPlay }) {
+export function Game({ play, setPlay, term }) {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [stickers, setStickers] = useState([]);
@@ -14,20 +14,20 @@ export function Game({ play, setPlay }) {
     endpoint: "search",
     // Exposing key so that app can run without backend
     key: "XCk8CWJJK1PN6hLJyEkpwaroDhoU0iFW",
-    term: "cute flower",
     limit: 10,
     // Randomize stickers for each round
-    offset: Math.floor(Math.random() * 100) + 1,
+    offset: Math.floor(Math.random() * 50) + 1,
   };
 
   useEffect(() => {
     let ignore = false;
     if (play) {
-      console.log("Running api...");
+      setLastMove(-1);
+      setScore(0);
       fetch(
         `https://api.giphy.com/v1/${query.resource}/${query.endpoint}?api_key=${
           query.key
-        }&q=${query.term.replace(" ", "+")}&limit=${query.limit}&offset=${
+        }&q=${term.replace("-", "+")}&limit=${query.limit}&offset=${
           query.offset
         }`
       )
@@ -54,7 +54,7 @@ export function Game({ play, setPlay }) {
     return () => {
       ignore = true;
     };
-  }, [play]);
+  }, [play, term]);
 
   function shuffle() {
     let copy = [...stickers];
@@ -92,8 +92,6 @@ export function Game({ play, setPlay }) {
 
   function restart() {
     setPlay(true);
-    setLastMove(-1);
-    setScore(0);
   }
 
   return (
@@ -123,7 +121,7 @@ export function Game({ play, setPlay }) {
         <Message
           title={"Congrats!"}
           content={
-            "You've picked exactly one of each flower. We hope you enjoy them, and thank you for visiting 👐."
+            "You've picked each sticker exactly once. We hope you enjoy them, and thank you for visiting 👐."
           }
           sticker={null}
           handleClick={restart}
@@ -133,7 +131,7 @@ export function Game({ play, setPlay }) {
         <Message
           title={"Oh no...."}
           content={
-            "It looks like you picked this flower twice! We must ask you to leave now 😔."
+            "It looks like you picked this sticker twice! We must ask you to leave now 😔."
           }
           sticker={stickers[lastMove].url}
           handleClick={restart}

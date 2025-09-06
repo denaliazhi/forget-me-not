@@ -22,7 +22,7 @@
 
 dialog {
   z-index: 20;
-  width: 23rem;
+  width: 24rem;
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: #ffffffa8;
@@ -36,6 +36,10 @@ dialog ol {
   text-align: left;
   padding: 1rem 1.5rem 1rem 3rem;
   font-size: 0.8rem;
+}
+
+.directions-btn {
+  justify-content: space-between;
 }
 
 .tray {
@@ -79,10 +83,10 @@ dialog ol {
   display: flex;
   gap: 3rem;
   justify-content: center;
+  margin: 2rem 0;
 }
 
 .scoreboard div {
-  margin-top: 1rem;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -97,10 +101,26 @@ dialog ol {
   font-weight: bold;
 }
 
-.directions-btn {
+.game-bar {
   display: flex;
-  gap: 1rem;
-  justify-content: space-between;
+  gap: 2rem;
+}
+
+.theme-picker {
+  display: flex;
+  gap: 0.1rem;
+  align-items: center;
+}
+
+.theme-picker h3 {
+  font-weight: normal;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.theme-picker .selected {
+  background-color: var(--dark-magenta);
+  color: white;
 }
 
 .msg-bar {
