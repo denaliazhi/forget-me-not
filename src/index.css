@@ -1,5 +1,10 @@
+@font-face {
+  font-family: "Fredoka";
+  src: url("./assets/Fredoka-VariableFont.ttf");
+}
+
 :root {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Fredoka", "Courier New", Courier, monospace;
   line-height: 1.5;
   font-weight: 400;
 
@@ -8,8 +13,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --dark-magenta: #744555;
-  --light-pink: #d2b2bd;
+  /* #744555, #d2b2bd */
+  --main: #6e7962;
+  --lighter-main: #bac4ad;
+  --darker-accent: #3c4735;
+  --accent: #4f5c47;
 }
 
 * {
@@ -22,8 +30,8 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--light-pink);
-  color: var(--dark-magenta);
+  background-color: var(--accent);
+  color: var(--lighter-main);
 }
 
 h1 {
@@ -41,19 +49,19 @@ p {
 
 button {
   border-radius: 8px;
-  border: 1px solid var(--dark-magenta);
+  border: 1px solid var(--main);
   padding: 0.6em 1.2em;
   font-size: 0.8rem;
   font-weight: 500;
   font-family: inherit;
-  color: var(--dark-magenta);
-  background-color: var(--light-pink);
+  color: var(--darker-accent);
+  background-color: transparent;
   cursor: pointer;
   transition: background-color ease-in-out 100ms, color ease-in-out 100ms;
 }
 button:hover {
-  background-color: var(--dark-magenta);
-  color: white;
+  background-color: var(--accent);
+  color: var(--lighter-main);
 }
 button:focus,
 button:focus-visible {

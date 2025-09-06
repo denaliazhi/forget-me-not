@@ -4,7 +4,7 @@ export function Options({ buttons, selected, handleClick }) {
       <h3>Pick</h3>
       {buttons.map((button) => (
         <button
-          className={selected === button.term && "selected"}
+          className={selected === button.term ? "selected" : null}
           id={button.term}
           onClick={(e) => handleClick(e.target.id)}
         >
